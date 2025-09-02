@@ -12,6 +12,19 @@ class LabelType(lib.Enum):
     EPL2 = "EPL2"
 
 
+class LabelSize(lib.Enum):
+    SIZE_4X4 = "4x4"
+    SIZE_4X6 = "4x6"
+    SIZE_4X7 = "4x7"
+    SIZE_4X8 = "4x8"
+    SIZE_4X9 = "4x9"
+    SIZE_4X11 = "4x11"
+    SIZE_6X4 = "6x4"
+    SIZE_6X6 = "6x6"
+    SIZE_6X9 = "6x9"
+    SIZE_8X11 = "8x11"
+    SIZE_11X8_5 = "11x8.5"
+
 class PaymentType(lib.StrEnum):
     sender = "SENDER"
     third_party = "THIRD_PARTY"
@@ -965,6 +978,7 @@ class ShippingOption(lib.Enum):
     easypost_invoice_number = lib.OptionEnum("invoice_number")
     easypost_label_date = lib.OptionEnum("label_date")
     easypost_label_format = lib.OptionEnum("label_format")
+    easypost_label_size = lib.OptionEnum("label_size")
     easypost_machinable = lib.OptionEnum("machinable", bool)
     easypost_payment = lib.OptionEnum("payment", dict)
     easypost_print_custom_1 = lib.OptionEnum("print_custom_1")
@@ -1013,6 +1027,10 @@ def shipping_options_initializer(
         options.update(
             easypost_invoice_number=getattr(payload.customs, "invoice", None),
         )
+
+    # Set default label_size if not provided
+    if "label_size" not in payload.options:
+        options.update(easypost_label_size="4x6")
 
     if hasattr(payload, "payment"):
         options.update(
