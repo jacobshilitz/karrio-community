@@ -6,7 +6,7 @@ import karrio.core.models as models
 
 
 class LabelType(lib.Enum):
-    PDF = "PDF"
+    PDF = "PNG"
     ZPL = "ZPL"
     PNG = "PNG"
     EPL2 = "EPL2"

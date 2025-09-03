@@ -28,6 +28,10 @@ def _extract_details(
     label_type = shipment.postage_label.label_file_type.split("/")[-1]
     label = provider_utils.download_label(shipment.postage_label.label_url)
 
+    if label_type == "png":
+       label =  lib.image_to_pdf(label)
+       label_type = 'pdf'
+
     return models.ShipmentDetails(
         carrier_id=settings.carrier_id,
         carrier_name=settings.carrier_name,
