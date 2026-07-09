@@ -449,6 +449,7 @@ ParsedErrorResponse = [
         {
             "carrier_id": "freightcom_rest",
             "carrier_name": "freightcom_rest",
+            "code": "error",
             "message": "Unable to get rates: services: invalid-syntax",
             "level": "error",
             "details": {

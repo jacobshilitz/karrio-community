@@ -21,6 +21,7 @@ def parse_error_response(
         models.Message(
             carrier_id=settings.carrier_id,
             carrier_name=settings.carrier_name,
+            code=error.get("code") or "error",
             message=(
                 error.get("message") + ": " + "; ".join(f"{k.replace('details.', '')}: {v}" for k, v in (error.get("details", {}) or error.get("data", {})).items())
                 if (error.get("details", {}) or error.get("data", {}))
